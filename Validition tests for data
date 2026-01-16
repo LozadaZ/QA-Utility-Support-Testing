@@ -1,0 +1,13 @@
+
+//Database Result Assertion. For backend Validation results tied to test reports
+public static void assertRecordExists(ResultSet resultSet) throws SQLException {
+    Assert.assertNotNull(resultSet, "Result set is null");
+    Assert.assertTrue(resultSet.next(), "Expected record was not found");
+}
+
+//Text Validation (Centralized assertion logic = cleaner test methods remember this)
+public static void assertTextEquals(WebElement element, String expectedText) {
+    String actualText = element.getText().trim();
+    Assert.assertEquals(actualText, expectedText.trim(),
+            "Text mismatch for element");
+}
