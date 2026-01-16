@@ -1,0 +1,12 @@
+//Sanity Test for login
+public class LoginSanityTest extends BaseTest {
+
+    @Test
+    public void verifyUserCanLogin() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("validUser", "validPassword");
+
+        Assert.assertTrue(driver.getTitle().contains("Dashboard"),
+                "User did not land on Dashboard page");
+    }
+}
