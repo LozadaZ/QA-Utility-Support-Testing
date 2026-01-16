@@ -10,3 +10,17 @@ public class LoginSanityTest extends BaseTest {
                 "User did not land on Dashboard page");
     }
 }
+
+//For incorrect login Regression
+public class LoginRegressionTest extends BaseTest {
+
+    @Test
+    public void verifyInvalidLoginShowsError() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("invalidUser", "wrongPassword");
+
+        Assert.assertTrue(driver.getPageSource().contains("Invalid credentials"),
+                "Error message not displayed");
+    }
+}
+
