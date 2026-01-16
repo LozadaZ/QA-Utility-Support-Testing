@@ -1,0 +1,16 @@
+
+//retry method for environments that are unstable
+public static void retryAction(Runnable action, int maxAttempts) {
+    int attempts = 0;
+    while (attempts < maxAttempts) {
+        try {
+            action.run();
+            return;
+        } catch (Exception e) {
+            attempts++;
+            if (attempts == maxAttempts) {
+                Assert.fail("Action failed after " + maxAttempts + " attempts");
+            }
+        }
+    }
+}
