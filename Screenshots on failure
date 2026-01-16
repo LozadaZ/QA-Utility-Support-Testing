@@ -1,0 +1,15 @@
+//Screenshots on failure 
+public static void captureScreenshot(WebDriver driver, String testName) {
+    TakesScreenshot screenshot = (TakesScreenshot) driver;
+    File src = screenshot.getScreenshotAs(OutputType.FILE);
+    File dest = new File("screenshots/" + testName + ".png");
+    src.renameTo(dest);
+}
+
+//automatic sceenshots without adding logic to every test. TEST NG (listener)
+@Override
+public void onTestFailure(ITestResult result) {
+    WebDriver driver = (WebDriver) result.getTestContext()
+            .getAttribute("driver");
+    captureScreenshot(driver, result.getName());
+}
