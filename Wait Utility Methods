@@ -1,0 +1,22 @@
+
+//Encapsulates wait logic so tests are more reliable and easier to maintain. Wait for an element to be clickable
+public static void safeClick(WebDriver driver, WebElement element, int timeoutSeconds) {
+    try {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+    } catch (TimeoutException e) {
+        Assert.fail("Element was not clickable within " + timeoutSeconds + " seconds");
+    }
+}
+                                                               
+
+//Wait for a page to load and then execute script 
+public static void assertPageLoaded(WebDriver driver, int timeoutSeconds) {
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+    Boolean pageLoaded = wait.until(webDriver ->
+            ((JavascriptExecutor) webDriver)
+                    .executeScript("return document.readyState")
+                    .equals("complete"));
+
+    Assert.assertTrue(pageLoaded, "Page did not load completely");
+}
