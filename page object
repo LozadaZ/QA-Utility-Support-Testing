@@ -1,0 +1,26 @@
+
+//page object examples change as needed for different elements. Best to use to keep seperate from tests.
+public class LoginPage {
+
+    private WebDriver driver;
+
+    @FindBy(id = "username")
+    private WebElement usernameField;
+
+    @FindBy(id = "password")
+    private WebElement passwordField;
+
+    @FindBy(id = "loginBtn")
+    private WebElement loginButton;
+
+    public LoginPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
+    public void login(String username, String password) {
+        usernameField.sendKeys(username);
+        passwordField.sendKeys(password);
+        loginButton.click();
+    }
+}
