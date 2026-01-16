@@ -1,0 +1,4 @@
+//helps data driven tests so you don't have to hardcode all the data 
+public static String generateUniqueEmail() {
+    return "qe_user_" + System.currentTimeMillis() + "@example.com";
+}
